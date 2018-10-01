@@ -1,25 +1,56 @@
+//mediaQuery
+@mixin iphone5 {
+	@media screen and (max-width: 334px) {
+		@content;
+	}
+}
+@mixin galaxy {
+	@media screen and (min-width: 335px) {
+		@content;
+	}
+}
+@mixin iphone6 {
+	@media screen and (min-width: 374px) {
+		@content;
+	}
+}
+@mixin iphone6plus {
+	@media screen and (min-width: 414px) {
+		@content;
+	}
+}
+
 // プレフィックスmixin
 @mixin prefixes($property, $value) {
 	@each $prefix in -webkit-, -moz-, -ms-, -o-, '' {
 		#{$prefix}#{$property}: $value;
 	}
 }
+
 // keyframes mixin
-@mixin keyframes($name) {
-	@-webkit-keyframes #{$name} {
+@mixin keyframes($animation-name) {
+	@-webkit-keyframes #{$animation-name} {
 		@content;
 	}
-	@-moz-keyframes #{$name} {
+	@-moz-keyframes #{$animation-name} {
 		@content;
 	}
-	@-ms-keyframes #{$name} {
+	@-ms-keyframes #{$animation-name} {
 		@content;
 	}
-	@keyframes #{$name} {
+	@keyframes #{$animation-name} {
 		@content;
 	}
 }
 
+@mixin animation($animation-name) {
+	-webkit-animation: $animation-name;
+	-moz-animation: $animation-name;
+	animation: $animation-name;
+	-webkit-animation-fill-mode: both;
+	-moz-animation-fill-mode: both;
+	animation-fill-mode: both;
+}
 
 // リンクカラー
 @mixin link-color($color) {
@@ -51,6 +82,54 @@
 	position: $position;
 	display: $display;
 	content: $content;
+}
+
+// marginによるセンタリング
+@mixin center-layout-m($width, $margin: auto, $max: false) {
+	display: block;
+	@if $max {
+		max-width: $width;
+	} @else {
+		width: $width;
+	}
+	margin: $margin;
+}
+
+// 中央寄せ(position)
+// $position…relative or absolute
+// $top…初期値 50%
+// $left…初期値 50%
+@mixin center_all($position, $top:50%, $left:50%) {
+	position: $position;
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	-o-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	top: $top;
+	left: $left;
+}
+
+// 縦中央寄せ(position)
+// $position…relative or absolute
+@mixin center_y($position) {
+	position: $position;
+	-moz-transform: translateY(-50%);
+	-webkit-transform: translateY(-50%);
+	-o-transform: translateY(-50%);
+	transform: translateY(-50%);
+	top: 50%;
+}
+
+// 横中央寄せ(position)
+// $position…relative or absolute
+@mixin center_x($position) {
+	position: $position;
+	-moz-transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
+	-o-transform: translateX(-50%);
+	transform: translateX(-50%);
+	left: 50%;
 }
 
 // フォントサイズのpxを%に返るmixin欲しいかもね！
