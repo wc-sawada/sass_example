@@ -1,4 +1,4 @@
 # sass_example
-今までよく使っていたmixinとかのまとめ
+今までよく使っていたmixinのまとめ
 
 /scss/_mixin.scssを参照してください
